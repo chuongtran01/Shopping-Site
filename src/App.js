@@ -1,3 +1,4 @@
+import CartFeature from 'features/Cart';
 import ProductFeature from 'features/Product/index';
 import React from 'react';
 import { Route, Switch } from '../node_modules/react-router-dom/index';
@@ -84,11 +85,12 @@ function App() {
   // }
 
   return (
-    <div className="App">
+    <div className="app">
       <Header/>
 
       <Switch>
         <Route path="/products" component={ProductFeature}/>
+        <Route path="/cart" component={CartFeature}/>
       </Switch>
     </div>
   );

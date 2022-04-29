@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import { SnackbarProvider } from '../node_modules/notistack/dist/index';
+import { SnackbarProvider } from 'notistack';
 import App from './App';
 import store from './app/store';
 import './index.css';
@@ -12,7 +12,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <SnackbarProvider>
+        <SnackbarProvider anchorOrigin={{vertical: 'top', horizontal: 'right'}}>
           <App />
         </SnackbarProvider>
       </BrowserRouter>

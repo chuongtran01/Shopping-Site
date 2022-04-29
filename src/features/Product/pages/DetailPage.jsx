@@ -11,6 +11,8 @@ import { Route, Switch } from '../../../../node_modules/react-router-dom/index';
 import ProductDescription from '../components/ProductDescription';
 import ProductAdditional from '../components/ProductAdditional';
 import ProductReviews from '../components/ProductReviews';
+import { useDispatch } from 'react-redux';
+import { addToCart } from 'features/Cart/cartSlice';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -43,6 +45,8 @@ function DetailPage() {
     const {params : {productId}, url} = useRouteMatch()
 
     const {product, loading} = useProductDetail(productId)
+
+    const dispatch = useDispatch()
     if (loading) {
         return (
             // TODO: Make a better loading (skeleton)
@@ -52,8 +56,15 @@ function DetailPage() {
         )
     }
 
-    const handleAddToCartSubmit = (formValues) => {
-        console.log('Form Submit', formValues);
+    const handleAddToCartSubmit = ({quantity}) => {
+        // console.log('Form Submit', formValues);
+        const action = addToCart({
+            id: product.id,
+            product,
+            quantity,
+        })
+        console.log(action);
+        dispatch(action)
     }
 
     return (

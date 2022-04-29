@@ -4,8 +4,8 @@ import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import InputField from 'components/form-controls/InputField/index';
-import { Avatar, Button, Typography, makeStyles } from '../../../../../node_modules/@material-ui/core/index';
-import { LockOutlined } from '../../../../../node_modules/@material-ui/icons/index';
+import { Avatar, Button, Typography, makeStyles } from '@material-ui/core';
+import { LockOutlined } from '@material-ui/icons';
 import PasswordField from 'components/form-controls/PasswordField/index';
 import { LinearProgress } from '@mui/material';
 
@@ -36,32 +36,20 @@ const useStyles = makeStyles(theme => ({
         right: 0
     }
 }))
-RegisterForm.propTypes = {
+LoginForm.propTypes = {
     onSubmit: PropTypes.func,
 };
 
-function RegisterForm(props) {
+function LoginForm(props) {
     const classes = useStyles()
     const schema = yup.object().shape({
-        fullName: yup
-            .string()
-            .required('Please enter your full name.')
-            .test('Should has at least two words', 'Please enter at least two words.', (value) => {
-                // return true if two words are entered 
-                return value.split(' ').length >= 2
-            }),
-        email: yup.string().required('Please enter an email address').email('Please enter a valid email address'),
-        password: yup.string().required('Please enter your password').min(6, 'Please enter at least 6 characters'),
-        retypePassword: yup.string().required('Please re-type your password').oneOf([yup.ref('password')], 'Password does not match'),
-        // oneOf mean similar to one of the above field
-
+        identifier: yup.string().required('Please enter an email address').email('Please enter a valid email address'),
+        password: yup.string().required('Please enter your password')
     })
     const form = useForm({
         defaultValues: {
-            fullName: '',
-            email: '',
+            identifier: '',
             password: '',
-            retypePassword: '',
         },
         resolver: yupResolver(schema)
     })
@@ -84,18 +72,16 @@ function RegisterForm(props) {
             </Avatar>
 
             <Typography className={classes.title} component="h3" variant="h5">
-                Create an account
+                Sign in
             </Typography>
             <form onSubmit={form.handleSubmit(handleSubmit)}>
-                <InputField name = "fullName" label="Full Name" form={form}/>
-                <InputField name = "email" label="Email" form={form}/>
+                <InputField name = "identifier" label="Email" form={form}/>
                 <PasswordField name = "password" label="Password" form={form}/>
-                <PasswordField name = "retypePassword" label="Retype Password" form={form}/>
 
-                <Button disabled={isSubmitting} type="submit" fullWidth className={classes.submit} variant="contained" color="primary" size="large">CREATE AN ACCOUNT</Button>
+                <Button disabled={isSubmitting} type="submit" fullWidth className={classes.submit} variant="contained" color="primary" size="large">SIGN IN</Button>
             </form>
         </div>
     );
 }
 
-export default RegisterForm;
+export default LoginForm;
