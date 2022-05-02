@@ -38,7 +38,7 @@ retrieved from an API.
 ---
 
 ## References
-- 
+- Easy Frontend
 
 [Back To The Top](#Shopping-Site)
 
