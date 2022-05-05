@@ -23,7 +23,7 @@ retrieved from an API.
 #### Technologies
 
 - HTML
-- SCSS
+- SASS
 - Javascript
 - ReactJS
 - Material UI
